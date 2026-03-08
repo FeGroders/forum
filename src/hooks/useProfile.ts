@@ -47,7 +47,7 @@ export function useUpdateProfile() {
   const { user, refreshProfile } = useAuth()
 
   return useMutation({
-    mutationFn: async (payload: Partial<Pick<Profile, 'full_name' | 'bio' | 'website' | 'avatar_url'>>) => {
+    mutationFn: async (payload: Partial<Pick<Profile, 'full_name' | 'bio' | 'website' | 'avatar_url' | 'github' | 'twitter' | 'linkedin' | 'instagram' | 'discord'>>) => {
       if (!user) throw new Error('Não autenticado')
 
       const { data, error } = await supabase

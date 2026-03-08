@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Separator } from '@/components/ui/separator'
 import CommentList from '@/components/comments/CommentList'
+import MarkdownContent from '@/components/ui/MarkdownContent'
 import { formatDate, formatRelativeTime, getInitials, cn } from '@/lib/utils'
 import { toast } from '@/hooks/useToast'
 import { Loader2 } from 'lucide-react'
@@ -112,9 +113,7 @@ export default function PostPage() {
         </div>
 
         {/* Conteúdo */}
-        <div className="prose prose-sm max-w-none text-foreground whitespace-pre-wrap leading-relaxed">
-          {post.content}
-        </div>
+        <MarkdownContent content={post.content} className="text-sm" />
 
         {/* Tags */}
         {post.tags && post.tags.length > 0 && (

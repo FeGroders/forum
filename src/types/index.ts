@@ -5,6 +5,11 @@ export interface Profile {
   avatar_url: string | null
   bio: string | null
   website: string | null
+  github: string | null
+  twitter: string | null
+  linkedin: string | null
+  instagram: string | null
+  discord: string | null
   created_at: string
   updated_at: string
 }

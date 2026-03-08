@@ -9,6 +9,7 @@ import { useVoteComment, useDeleteComment } from '@/hooks/useComments'
 import { formatRelativeTime, getInitials, cn } from '@/lib/utils'
 import { toast } from '@/hooks/useToast'
 import CommentForm from './CommentForm'
+import MarkdownContent from '@/components/ui/MarkdownContent'
 
 interface CommentCardProps {
   comment: Comment
@@ -58,7 +59,7 @@ export default function CommentCard({ comment, postId, depth = 0 }: CommentCardP
         </div>
 
         {/* Conteúdo */}
-        <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{comment.content}</p>
+        <MarkdownContent content={comment.content} className="text-sm" />
 
         {/* Ações */}
         <div className="flex items-center gap-0.5 -ml-1">

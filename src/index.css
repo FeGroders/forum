@@ -80,6 +80,161 @@
   }
 }
 
+/* ========================
+   Markdown Content Styles
+   ======================== */
+
+.markdown-content {
+  @apply leading-relaxed break-words;
+}
+
+.markdown-content > * + * {
+  @apply mt-3;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4 {
+  @apply font-semibold tracking-tight mt-5 mb-2;
+}
+
+.markdown-content h1 { @apply text-xl; }
+.markdown-content h2 { @apply text-lg; }
+.markdown-content h3 { @apply text-base; }
+.markdown-content h4 { @apply text-sm; }
+
+.markdown-content p {
+  @apply leading-relaxed;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  @apply pl-5 space-y-1;
+}
+
+.markdown-content ul {
+  @apply list-disc;
+}
+
+.markdown-content ol {
+  @apply list-decimal;
+}
+
+.markdown-content li > ul,
+.markdown-content li > ol {
+  @apply mt-1;
+}
+
+.markdown-content blockquote {
+  @apply border-l-4 border-border pl-4 italic text-muted-foreground;
+}
+
+.markdown-content hr {
+  @apply border-border my-4;
+}
+
+.markdown-content a {
+  @apply text-primary underline underline-offset-2 hover:opacity-80 transition-opacity;
+}
+
+.markdown-content strong {
+  @apply font-semibold;
+}
+
+.markdown-content em {
+  @apply italic;
+}
+
+.markdown-content del {
+  @apply line-through text-muted-foreground;
+}
+
+/* Código inline */
+.markdown-content code:not(pre code) {
+  @apply bg-muted text-foreground font-mono text-[0.85em] px-1.5 py-0.5 rounded;
+}
+
+/* Bloco de código */
+.markdown-content pre {
+  @apply bg-muted rounded-lg overflow-x-auto my-3;
+}
+
+.markdown-content pre code {
+  @apply block p-4 font-mono text-sm leading-relaxed bg-transparent text-foreground;
+}
+
+/* Tabelas */
+.markdown-content table {
+  @apply w-full border-collapse text-sm my-3;
+}
+
+.markdown-content thead {
+  @apply bg-muted;
+}
+
+.markdown-content th {
+  @apply border border-border px-3 py-1.5 text-left font-semibold;
+}
+
+.markdown-content td {
+  @apply border border-border px-3 py-1.5;
+}
+
+.markdown-content tr:nth-child(even) {
+  @apply bg-muted/40;
+}
+
+/* Highlight.js - tema adaptado ao tema do site */
+.hljs {
+  background: transparent !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in,
+.hljs-name,
+.hljs-tag {
+  color: hsl(var(--primary)) !important;
+  font-weight: 600;
+}
+
+.hljs-string,
+.hljs-attr,
+.hljs-selector-attr {
+  color: hsl(142, 71%, 45%) !important;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: hsl(var(--muted-foreground)) !important;
+  font-style: italic;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-link {
+  color: hsl(30, 100%, 60%) !important;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: hsl(210, 80%, 60%) !important;
+}
+
+.hljs-function .hljs-title,
+.hljs-title.function_ {
+  color: hsl(270, 70%, 70%) !important;
+}
+
+.dark .hljs-string,
+.dark .hljs-attr {
+  color: hsl(142, 71%, 55%) !important;
+}
+
 /* Scrollbar customizado */
 ::-webkit-scrollbar {
   width: 6px;

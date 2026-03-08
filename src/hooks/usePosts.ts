@@ -22,7 +22,17 @@ export function usePosts(filters: PostFilters = {}) {
         .range(pageParam * PAGE_SIZE, (pageParam + 1) * PAGE_SIZE - 1)
 
       if (filters.category) {
-        query = query.eq('category.slug', filters.category)
+        const { data: cat } = await supabase
+          .from('categories')
+          .select('id')
+          .eq('slug', filters.category)
+          .single()
+        if (cat) {
+          query = query.eq('category_id', cat.id)
+        } else {
+          // Categoria não encontrada: retorna vazio
+          return { data: [], nextPage: undefined }
+        }
       }
 
       if (filters.search) {

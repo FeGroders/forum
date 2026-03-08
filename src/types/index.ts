@@ -10,6 +10,7 @@ export interface Profile {
   linkedin: string | null
   instagram: string | null
   discord: string | null
+  badges: string[]
   created_at: string
   updated_at: string
 }

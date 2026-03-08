@@ -14,6 +14,9 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent } from '@/components/ui/card'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import PostCard from '@/components/posts/PostCard'
+import { BadgeIcon } from '@/components/badges/BadgeIcon'
+import { BadgeSelector } from '@/components/badges/BadgeSelector'
+import { BADGES_BY_ID } from '@/lib/badges'
 import { formatDate, getInitials } from '@/lib/utils'
 import { toast } from '@/hooks/useToast'
 import type { Post } from '@/types'
@@ -115,6 +118,7 @@ export default function ProfilePage() {
   const { data: posts } = useUserPosts(profile?.id ?? '')
   const updateProfile = useUpdateProfile()
   const [editOpen, setEditOpen] = useState(false)
+  const [selectedBadges, setSelectedBadges] = useState<string[]>([])
 
   const isOwner = user?.id === profile?.id
 
@@ -133,6 +137,11 @@ export default function ProfilePage() {
     },
   })
 
+  function openEdit() {
+    setSelectedBadges(profile?.badges ?? [])
+    setEditOpen(true)
+  }
+
   async function onEditSubmit(data: EditFormData) {
     try {
       await updateProfile.mutateAsync({
@@ -145,6 +154,7 @@ export default function ProfilePage() {
         linkedin: data.linkedin || undefined,
         instagram: data.instagram || undefined,
         discord: data.discord || undefined,
+        badges: selectedBadges,
       })
       toast({ title: 'Perfil atualizado!' })
       setEditOpen(false)
@@ -193,6 +203,16 @@ export default function ProfilePage() {
                 <p className="text-sm leading-relaxed max-w-prose">{profile.bio}</p>
               )}
 
+              {profile.badges?.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {profile.badges.map((id) => {
+                    const badge = BADGES_BY_ID[id]
+                    if (!badge) return null
+                    return <BadgeIcon key={id} badge={badge} size="sm" />
+                  })}
+                </div>
+              )}
+
               <div className="flex flex-wrap gap-3 text-xs text-muted-foreground pt-0.5">
                 {profile.website && (
                   <a
@@ -232,7 +252,7 @@ export default function ProfilePage() {
             </div>
 
             {isOwner && (
-              <Button variant="outline" size="sm" onClick={() => setEditOpen(true)} className="gap-1.5 shrink-0">
+              <Button variant="outline" size="sm" onClick={openEdit} className="gap-1.5 shrink-0">
                 <Pencil className="h-3.5 w-3.5" />
                 Editar perfil
               </Button>
@@ -311,6 +331,12 @@ export default function ProfilePage() {
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* Badges */}
+            <div className="border-t pt-4 space-y-2">
+              <p className="text-sm font-medium">Badges de tecnologia</p>
+              <BadgeSelector value={selectedBadges} onChange={setSelectedBadges} />
             </div>
 
             <div className="flex gap-2 pt-2">
